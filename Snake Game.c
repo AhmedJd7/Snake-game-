@@ -7,7 +7,8 @@
 #define N 20
 #define M 40
 
-int i,j,Field[N][M],x,y,Gy,Head,Tail,Game,Frogs,a,b,var,dir,score,HighScore,Speed;
+int i,j,Field[N][M],x,y,Gy,Head,Tail,Game,Frogs,a,b,var,dir,score,HighScore;
+float Speed;
 
 FILE *f;
 
@@ -31,7 +32,7 @@ void snakeInitialization(){
 	Frogs = 0;
 	dir='d';
 	score=0;
-	Speed = 99;
+	Speed = 100;
 
     for(i=0;i<Head;i++){
         Gy++;
@@ -49,7 +50,7 @@ void print(){
             printf("%c",205);
         }
     }
-    printf("   Current Score: %d  HighScore: %d",score,HighScore);
+    printf("   Current Score: %d  HighScore: %d  Speed: %.2f",score,HighScore, (100-Speed));
     printf("\n");
 
     for(i=0;i<N;i++){
@@ -102,7 +103,7 @@ void Random(){
     if(Frogs == 0 && Field[a][b]==0){
         Field[a][b]= -1;
         Frogs = 1;
-        if(Speed>10 && score!=0) Speed = Speed - 5;
+        if (Speed>1) Speed -= (score/5)*0.1;
     }
 }
 
